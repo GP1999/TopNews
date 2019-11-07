@@ -1,0 +1,61 @@
+{% load hometags %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{% static 'Home/index.css' %}">
+    <title>Document</title>
+</head>
+
+<body>
+   
+    {% comment %} {% for i in headings %}
+    <div class='news' style='display:block;'>
+        <h3>{{ i }}</h3>
+        <img  style="width:500px;height:400px;" src={{ imglinks|index:forloop.counter0 }} alt="sorry not available">
+       <p>{{articles|index:forloop.counter0}}</p>
+    </div>
+    {% endfor %} {% endcomment %}
+     <div class='comp'><h1>TopNews</h1></div>
+    <form method='post' action="" class="Filter">
+    {% csrf_token %}
+     <select name="country">
+        <option  disabled selected value >Choose Country</option>
+        <option value="in">India</option>
+        <option value="us">us</option>
+        <option value="ca">Canada</option>
+    </select> 
+    <select name="category">
+        <option  disabled selected value >Choose category</option>
+        <option value="general">General</option>
+        <option value="business">Business</option>
+        <option value="entertainment">Entertainment</option>
+        <option value="health">Health</option>
+        <option value="science">Science</option>
+        <option value="sports">Sports</option>
+        <option value="technology">Technology</option>
+    </select>
+    <input type="submit" value="Filter" id='bt1'>
+    </form>
+    <h6 style="text-align:center">Click on heading to read full article</h6>
+    {% for sp in headings%}
+    <div class="container">
+        <div class="image">
+        <img src={{ imglinks|index:forloop.counter0 }}>
+        </div>
+        <div class="desc">
+
+       <a href={{ urls|index:forloop.counter0 }}><h3 id="heading">{{ headings|index:forloop.counter0 }}</h3></a>
+       <p id="artic">
+       {{ articles|index:forloop.counter0 }}
+       </p>
+        </div>  
+    </div>
+    {% endfor %}
+     
+
+</body>
+</html>
